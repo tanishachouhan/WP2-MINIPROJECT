@@ -39,7 +39,7 @@ export default function Sidebar({ open, onClose }) {
 
         <div className="sidebar-footer">
           <p>🎓 College Mini-Project</p>
-          <p className="sidebar-footer-sub">Dept. of Computer Engineering</p>
+          <p className="sidebar-footer-sub">Dept. of Information Technology Engineering</p>
         </div>
       </aside>
       {open && <div className="sidebar-backdrop" onClick={onClose} />}
