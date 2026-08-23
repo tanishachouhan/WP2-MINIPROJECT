@@ -15,7 +15,7 @@ export default function Sidebar({ open, onClose }) {
         <div className="sidebar-brand">
           <span className="sidebar-logo">🌱</span>
           <div>
-            <h1 className="sidebar-title">AgriSense</h1>
+            <h1 className="sidebar-title">AgriSmart</h1>
             <p className="sidebar-tagline">Smart Sugarcane Irrigation</p>
           </div>
         </div>
