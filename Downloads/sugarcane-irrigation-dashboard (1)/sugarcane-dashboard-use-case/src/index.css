@@ -1,0 +1,202 @@
+/* ===========================================================
+   Global design tokens - Smart Sugarcane Irrigation Dashboard
+   Clean green agricultural theme, light backgrounds.
+   =========================================================== */
+
+:root {
+  --color-bg: #F6FAF2;
+  --color-surface: #FFFFFF;
+  --color-primary: #2F6B3C;
+  --color-primary-dark: #234F2C;
+  --color-primary-light: #E4F2E1;
+  --color-secondary: #6FA96B;
+  --color-water: #3A7CA5;
+  --color-water-light: #E4F0F6;
+  --color-warning: #D98A3D;
+  --color-warning-light: #FBEEDD;
+  --color-danger: #C1443D;
+  --color-danger-light: #FBE7E5;
+  --color-text: #1F2D20;
+  --color-text-muted: #64735F;
+  --color-border: #E1EBDD;
+
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  --shadow-card: 0 2px 10px rgba(47, 107, 60, 0.08);
+  --shadow-card-hover: 0 6px 18px rgba(47, 107, 60, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  margin: 0;
+  color: var(--color-primary-dark);
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ---------- Reusable primitives ---------- */
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 20px;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-healthy {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.badge-attention {
+  background: var(--color-warning-light);
+  color: #8A5A21;
+}
+
+.badge-critical {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+}
+
+.badge-info {
+  background: var(--color-water-light);
+  color: var(--color-water);
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: var(--color-primary-light);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.section-subtitle {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.link-more {
+  font-size: 13px;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.page-content {
+  padding: 22px 26px 40px;
+}
+
+@media (max-width: 560px) {
+  .page-content {
+    padding: 18px 16px 32px;
+  }
+}
+
+.btn {
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 9px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-body);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-outline:hover {
+  background: var(--color-primary-light);
+}
