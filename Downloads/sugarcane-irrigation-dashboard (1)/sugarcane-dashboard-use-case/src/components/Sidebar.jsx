@@ -8,7 +8,7 @@ const navItems = [
   { to: "/ai-advisory", label: "AI Advisory", icon: "📢" },
 ];
 
-export default function Sidebar({ open, onClose }) {
+export default function Sidebar({ open, onClose, onLogout }) {
   return (
     <>
       <aside className={`sidebar ${open ? "sidebar-open" : ""}`}>
@@ -38,8 +38,11 @@ export default function Sidebar({ open, onClose }) {
         </nav>
 
         <div className="sidebar-footer">
-          <p>🎓 College Mini-Project</p>
-          <p className="sidebar-footer-sub">Dept. of Information Technology Engineering</p>
+          <button className="sidebar-logout-btn" onClick={onLogout}>
+            🚪 Logout
+          </button>
+          <p>Web Programming-II Mini-Project</p>
+          <p className="sidebar-footer-sub">Dept. of IT Engineering</p>
         </div>
       </aside>
       {open && <div className="sidebar-backdrop" onClick={onClose} />}

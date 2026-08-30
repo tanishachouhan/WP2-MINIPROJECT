@@ -76,6 +76,22 @@
   color: var(--color-text-muted);
 }
 
+.sidebar-logout-btn {
+  width: 100%;
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.sidebar-logout-btn:hover {
+  background: #f6d5d3;
+}
+
 .sidebar-footer-sub {
   margin-top: 2px;
   font-size: 11px;

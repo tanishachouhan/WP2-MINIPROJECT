@@ -16,7 +16,7 @@ export default function Dashboard({ onMenuClick }) {
   return (
     <>
       <Topbar
-        title={`Welcome back, ${farmer.name.split(" ")[0]} 👋`}
+        title={`Welcome back, ${farmer.name.split(" ")[0]}`}
         subtitle="Here's your complete sugarcane farm overview for today"
         onMenuClick={onMenuClick}
       />

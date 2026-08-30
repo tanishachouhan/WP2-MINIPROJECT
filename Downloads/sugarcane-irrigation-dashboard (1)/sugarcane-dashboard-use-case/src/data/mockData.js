@@ -57,22 +57,6 @@ export const plots = [
   },
 ];
 
-export const weather = {
-  location: "Karad, Satara",
-  temperature: 29,
-  condition: "Partly Cloudy",
-  humidity: 68,
-  rainfallChance: 30,
-  windSpeed: 11, // km/h
-  forecast: [
-    { day: "Fri", temp: 29, condition: "Cloudy" },
-    { day: "Sat", temp: 31, condition: "Sunny" },
-    { day: "Sun", temp: 28, condition: "Rain" },
-    { day: "Mon", temp: 27, condition: "Rain" },
-    { day: "Tue", temp: 30, condition: "Sunny" },
-  ],
-};
-
 export const irrigationPredictions = {
   "PLOT-01": {
     nextIrrigationDate: "24 Aug 2026",

@@ -17,7 +17,7 @@ export default function AIAdvisory({ onMenuClick }) {
   return (
     <>
       <Topbar
-        title="AI Advisory & Notifications"
+        title="AI Advisory"
         subtitle="Simple, farmer-friendly advisories generated from farm data"
         onMenuClick={onMenuClick}
       />
