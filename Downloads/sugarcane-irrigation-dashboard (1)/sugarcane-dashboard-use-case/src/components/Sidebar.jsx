@@ -39,7 +39,11 @@ export default function Sidebar({ open, onClose, onLogout }) {
 
         <div className="sidebar-footer">
           <button className="sidebar-logout-btn" onClick={onLogout}>
+<<<<<<< HEAD
+          Logout
+=======
             Logout
+>>>>>>> 366f3ebf2ba5ea83e09d5140a7dc8a2de76e7e5f
           </button>
           <p>Web Programming-II Mini-Project</p>
           <p className="sidebar-footer-sub">Dept. of IT Engineering</p>
