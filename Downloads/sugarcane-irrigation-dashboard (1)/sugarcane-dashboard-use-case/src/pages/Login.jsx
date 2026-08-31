@@ -30,17 +30,32 @@ export default function Login({ onLogin }) {
     return next;
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    setSubmitted(true);
-    const validationErrors = validate();
-    setErrors(validationErrors);
+function handleSubmit(e) {
+  e.preventDefault();
+  setSubmitted(true);
 
-    if (Object.keys(validationErrors).length === 0) {
-      // No backend — this is a mock login for the prototype.
-      onLogin();
-    }
+  const validationErrors = validate();
+  setErrors(validationErrors);
+
+  // First check whether the fields themselves are valid
+  if (Object.keys(validationErrors).length > 0) {
+    return;
   }
+
+  // Demo credentials
+  const DEMO_ID = "ramesh.patil";
+  const DEMO_PASSWORD = "Sugarcane@123";
+
+  if (form.id !== DEMO_ID || form.password !== DEMO_PASSWORD) {
+    setErrors({
+      login: "Invalid User ID or password. Please use the demo credentials."
+    });
+    return;
+  }
+
+  // Successful demo login
+  onLogin();
+}
 
   return (
     <div className="auth-page">
