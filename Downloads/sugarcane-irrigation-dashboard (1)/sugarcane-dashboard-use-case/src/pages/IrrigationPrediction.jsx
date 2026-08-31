@@ -1,40 +1,24 @@
 import { useEffect, useState } from "react";
-
 import Topbar from "../components/Topbar";
 import WeatherCard from "../components/WeatherCard";
 import StatusBadge from "../components/StatusBadge";
-
 import { plots } from "../data/mockData";
-
 import { getWeatherForecast } from "../services/weatherApi";
 import { calculateIrrigationDate } from "../services/irrigationCalculator";
-
 import "./IrrigationPrediction.css";
 
 
 export default function IrrigationPrediction({ onMenuClick }) {
-
   const [selectedId, setSelectedId] = useState(plots[0].id);
-
   const [prediction, setPrediction] = useState(null);
-
   const [loading, setLoading] = useState(true);
-
   const [error, setError] = useState("");
-
 
   const plot = plots.find(
     (p) => p.id === selectedId
   );
 
-
-  // --------------------------------------------------
-  // Extract latitude and longitude from:
-  // "17.28°N, 74.19°E"
-  // --------------------------------------------------
-
   function getCoordinates(location) {
-
     const match = location.match(
       /(-?\d+(?:\.\d+)?)°?([NS]),?\s*(-?\d+(?:\.\d+)?)°?([EW])/i
     );
@@ -52,7 +36,6 @@ export default function IrrigationPrediction({ onMenuClick }) {
     if (latitudeDirection === "S") {
       latitude = -latitude;
     }
-
     if (longitudeDirection === "W") {
       longitude = -longitude;
     }
@@ -63,111 +46,72 @@ export default function IrrigationPrediction({ onMenuClick }) {
     };
   }
 
-
-  // --------------------------------------------------
-  // Fetch weather + calculate irrigation date
-  // --------------------------------------------------
-
   useEffect(() => {
-
     async function loadPrediction() {
-
       try {
 
         setLoading(true);
         setError("");
         setPrediction(null);
 
-
         const {
           latitude,
           longitude,
         } = getCoordinates(plot.location);
 
-
-        // Get live weather forecast
         const weatherData =
           await getWeatherForecast(
             latitude,
             longitude
           );
 
-
-        // Calculate irrigation recommendation
         const result =
           calculateIrrigationDate(
             plot,
             weatherData
           );
 
-
         setPrediction(result);
 
       } catch (err) {
-
         console.error(err);
-
         setError(
           "Unable to fetch weather data. Please check your internet connection and try again."
         );
 
       } finally {
-
         setLoading(false);
-
       }
-
     }
-
 
     loadPrediction();
 
   }, [selectedId]);
 
-
-  // --------------------------------------------------
-  // Loading screen
-  // --------------------------------------------------
-
   if (loading) {
 
     return (
       <>
-
         <Topbar
           title="Irrigation Prediction"
           subtitle="AI-based recommendation for the next irrigation date"
           onMenuClick={onMenuClick}
         />
-
-
         <div className="page-content">
-
           <div className="card prediction-card">
-
             <h2>
               Loading irrigation prediction...
             </h2>
-
             <p>
               Checking the latest weather forecast
               and calculating the recommended irrigation date.
             </p>
-
           </div>
-
         </div>
-
       </>
     );
 
   }
-
-
-  // --------------------------------------------------
-  // Error screen
-  // --------------------------------------------------
-
   if (error) {
 
     return (
@@ -178,57 +122,29 @@ export default function IrrigationPrediction({ onMenuClick }) {
           subtitle="AI-based recommendation for the next irrigation date"
           onMenuClick={onMenuClick}
         />
-
-
         <div className="page-content">
-
           <div className="card prediction-card">
-
             <h2>
               ⚠️ Unable to calculate prediction
             </h2>
-
             <p>
               {error}
             </p>
-
           </div>
-
         </div>
-
       </>
     );
-
   }
-
-
-  // --------------------------------------------------
-  // Current date
-  // --------------------------------------------------
-
   const today = new Date();
 
   today.setHours(0, 0, 0, 0);
-
-
-  // --------------------------------------------------
-  // Recommended irrigation date
-  // --------------------------------------------------
 
   const irrigationDate =
     new Date(prediction.date);
 
   irrigationDate.setHours(0, 0, 0, 0);
-
-
-  // --------------------------------------------------
-  // Calculate number of days between today
-  // and recommended irrigation date
-  // --------------------------------------------------
-
   const millisecondsPerDay =
     1000 * 60 * 60 * 24;
-
 
   const daysLeft = Math.max(
     0,
@@ -238,20 +154,10 @@ export default function IrrigationPrediction({ onMenuClick }) {
     )
   );
 
-
-  // --------------------------------------------------
-  // Urgency text
-  // --------------------------------------------------
-
   const urgency =
     daysLeft === 0
       ? "Irrigate Today"
       : `In ${daysLeft} day(s)`;
-
-
-  // --------------------------------------------------
-  // Format recommended date
-  // --------------------------------------------------
 
   const formattedDate =
     irrigationDate.toLocaleDateString(
@@ -263,24 +169,18 @@ export default function IrrigationPrediction({ onMenuClick }) {
       }
     );
 
-
   return (
     <>
-
       <Topbar
         title="Irrigation Prediction"
         subtitle="AI-based recommendation for the next irrigation date"
         onMenuClick={onMenuClick}
       />
-
-
       <div className="page-content">
-
 
         {/* -----------------------------------------
             Plot Selector
         ------------------------------------------ */}
-
         <div className="card plot-selector">
 
           <label
@@ -290,7 +190,6 @@ export default function IrrigationPrediction({ onMenuClick }) {
             Select Plot
           </label>
 
-
           <select
             id="plot-select"
             className="plot-selector-input"
@@ -299,7 +198,6 @@ export default function IrrigationPrediction({ onMenuClick }) {
               setSelectedId(e.target.value)
             }
           >
-
             {plots.map((p) => (
 
               <option
@@ -314,112 +212,65 @@ export default function IrrigationPrediction({ onMenuClick }) {
           </select>
 
         </div>
-
-
         <div className="prediction-grid">
-
 
           {/* -----------------------------------------
               Prediction Card
           ------------------------------------------ */}
 
           <div className="card prediction-card">
-
-
             <div className="prediction-card-header">
-
               <div>
-
                 <p className="prediction-eyebrow">
                   Recommended Next Irrigation Date
                 </p>
-
-
                 <h2 className="prediction-date">
                   {formattedDate}
                 </h2>
-
               </div>
-
-
               <span className="badge badge-info">
                 {urgency}
               </span>
-
             </div>
-
-
             <p className="prediction-reason">
               {prediction.reason}
             </p>
-
-
             {/* ---------------------------------------
                 Prediction Stats
             ---------------------------------------- */}
-
             <div className="prediction-stats">
-
-
               <div className="prediction-stat">
-
                 <p className="prediction-stat-label">
                   💧 Water Required
                 </p>
-
                 <p className="prediction-stat-value">
                   {prediction.waterRequired}
                 </p>
-
               </div>
-
-
               <div className="prediction-stat">
-
                 <p className="prediction-stat-label">
                   🧪 Current Soil Moisture
                 </p>
-
                 <p className="prediction-stat-value">
                   {plot.soilMoisture}%
                 </p>
-
               </div>
 
-
               <div className="prediction-stat">
-
                 <p className="prediction-stat-label">
                   🌱 Crop Stage
                 </p>
-
                 <p className="prediction-stat-value">
                   {plot.cropStage}
                 </p>
 
               </div>
-
-
             </div>
 
-
-            {/* ---------------------------------------
-                Confidence
-            ---------------------------------------- */}
-
             <div className="confidence-block">
-
-
               <div className="confidence-block-label">
-
-                <span>
-                  🤖 AI Prediction Confidence
-                </span>
-
-                <span>
-                  {prediction.confidence}%
-                </span>
-
+                <span>🤖 AI Prediction Confidence</span>
+                <span>{prediction.confidence}%</span>
               </div>
 
 
